@@ -16,10 +16,10 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-Management-PowerShell
      ```
 
-3. **Create an External Virtual Switch in Hyper-V:**
+3. **Change WSL Virtual Switch to External in Hyper-V:**
    - Open PowerShell as administrator and run:
      ```powershell
-     New-VMSwitch -Name "External Switch" -NetAdapterName eth0
+     Set-VMSwitch WSL -SwitchType External
      ```
 
 4. **Modify the WSL Configuration:**
