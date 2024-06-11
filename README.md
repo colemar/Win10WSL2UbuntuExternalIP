@@ -32,7 +32,7 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      Sometimes it fails and shows strange error messages. If you close and reopen the Virtual Switch Manager you will find that the WSL virtual switch has changed to "Private network"; try again to set it to "External network" and it should work this time. Sometimes you have to manually set it to "Private network" beforehand.
 
 5. **Modify the WSL Configuration:**
-   - **Do not** use `networkingMode = bridged` in the `.wslconfig` file in your user profile directory (`$env:USERPROFILE/.wslconfig`).
+   - **Do not** use `networkingMode = bridged` in the `.wslconfig` file in your user profile directory (`%USERPROFILE%\.wslconfig`).
    - Instead, use `networkingMode = NAT` (the default) or remove it altogether.
 
 6. **Enable systemd in the WSL Distribution and flush ip configuration at boot:**
