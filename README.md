@@ -71,7 +71,7 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      DNS=192.168.w.z # usually z=y
      ```
 
-8. **Link systemd Resolv.conf:**
+8. **Link systemd resolv.conf:**
    - Create a symbolic link to link resolv.conf from systemd:
      ```bash
      ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
