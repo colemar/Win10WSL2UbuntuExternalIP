@@ -60,14 +60,15 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      [Network]
      DHCP=yes
      ```
+     An empty `/etc/systemd/network` directory should be equivalent to the above settings.
    - For static address configuration, use:
      ```plaintext
      [Match]
      Name=eth0
      [Network]
-     Address=192.168.x.xx/24
-     Gateway=192.168.x.x
-     DNS=192.168.x.x
+     Address=192.168.w.x/24
+     Gateway=192.168.w.y # usually y=1
+     DNS=192.168.w.z # usually z=y
      ```
 
 8. **Link systemd Resolv.conf:**
