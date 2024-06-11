@@ -27,8 +27,9 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      Set-VMSwitch "WSL" -NetAdapterName "Wired"
      ```
    - If the above commmand fails, do it via Hyper-V manager / Virtual Switch Manager:
-![image](https://github.com/colemar/Win10WSL2UbuntuExternalIP/assets/3066000/f7a14b1b-5214-4e78-aa34-eb16a80ae66a)
-
+     ![image](https://github.com/colemar/Win10WSL2UbuntuExternalIP/assets/3066000/f7a14b1b-5214-4e78-aa34-eb16a80ae66a)
+     
+     Sometimes it fails and shows strange error messages. If you close and reopen the Virtual Switch Manager you will find that the WSL virtual switch has changed to "Private network"; try again to set it to "External network" and it should work this time. Sometimes you have to manually set it to "Private network" beforehand.
 
 5. **Modify the WSL Configuration:**
    - **Do not** use `networkingMode = bridged` in the `.wslconfig` file in your user profile directory (`$env:USERPROFILE/.wslconfig`).
