@@ -20,17 +20,13 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
 3. **Change WSL Virtual Switch to External in Hyper-V:**
    - Open PowerShell as administrator and run:
      ```powershell
-     Get-NetAdapter -Name * -Physical
+     Get-NetAdapter -Physical
      ```
-     ![image](https://github.com/colemar/Win10WSL2UbuntuExternalIP/assets/3066000/90f16024-2e61-45cf-b4b2-de957505bde2)
+     ![image](https://github.com/colemar/Win10WSL2UbuntuExternalIP/assets/3066000/187557fe-d05b-4079-a59a-76b0ee05412a)
      ```powershell
-     Set-VMSwitch WSL -SwitchType External -NetAdapterName "Wired"
+     Set-VMSwitch "WSL" -NetAdapterName "Wired"
      ```
-   - If the above commmand fails, try:
-     ```powershell
-     Set-VMSwitch WSL -SwitchType External -NetAdapterInterfaceDescription "Realtek PCIe GBE Family Controller #2"
-     ```
-   - If it fails again, do it via Hyper-V manager / Virtual Switch Manager:
+   - If the above commmand fails, do it via Hyper-V manager / Virtual Switch Manager:
 ![image](https://github.com/colemar/Win10WSL2UbuntuExternalIP/assets/3066000/f7a14b1b-5214-4e78-aa34-eb16a80ae66a)
 
 
