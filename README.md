@@ -47,7 +47,7 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      [boot]
      systemd=true
      # remove NAT related ip configuration applied by WSL at boot
-     command = ip address flush dev eth0 # see `networkctl` command output for the interface name, assuming `eth0` here
+     command = ip address flush dev eth0 # see networkctl command output for the interface name, assuming eth0 here
      [network]
      generateResolvConf = false
      ```
@@ -58,7 +58,7 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      sudo systemctl stop NetworkManager; sudo systemctl disable NetworkManager # in case NetworkManager service is present and enabled
      sudo systemctl enable systemd-networkd
      sudo mkdir /etc/systemd/network
-     networkctl # display the available network interfaces, assuming `eth0` here
+     networkctl # display the available network interfaces, assuming eth0 here
      ```
      - For dynamic address configuration, ensure the following is present in `/etc/systemd/network/10-eth0.network`:
      ```plaintext
