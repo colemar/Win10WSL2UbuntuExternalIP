@@ -47,13 +47,20 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      [boot]
      systemd=true
      # remove NAT related ip configuration applied by WSL at boot
-     command = ip address flush dev eth0
+     command = ip address flush dev eth0 # see `networkctl` command output for the interface name, assuming `eth0` here
      [network]
      generateResolvConf = false
      ```
 
 7. **Configure Network Addressing:**
-   - For dynamic address configuration, ensure the following is present in `/etc/systemd/network/10-eth0.network`:
+     - Enable systemd-networkd service:
+     ```bash
+     sudo systemctl stop NetworkManager; sudo systemctl disable NetworkManager # in case NetworkManager service is present and enabled
+     sudo systemctl enable systemd-networkd
+     sudo mkdir /etc/systemd/network
+     networkctl # display the available network interfaces, assuming `eth0` here
+     ```
+     - For dynamic address configuration, ensure the following is present in `/etc/systemd/network/10-eth0.network`:
      ```plaintext
      [Match]
      Name=eth0
@@ -70,14 +77,28 @@ This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing
      Gateway=192.168.w.y # usually y=1
      DNS=192.168.w.z # usually z=y
      ```
+   - Restart systemd-networkd and check IP configuration
+     ```bash
+     sudo systemctl restart systemd-networkd
+     sudo systemctl status systemd-networkd
+     networkctl
+     ip addr show eth0
+     ip route
+     ```
+   - [Source](https://linux.fernandocejas.com/docs/how-to/switch-from-network-manager-to-systemd-networkd)
 
-8. **Link systemd resolv.conf:**
+8. **Enable domain names resolution via resolved:**
+   - Enable systemd-resolved service:
+     ```bash
+     sudo systemctl enable systemd-resolved
+     sudo systemctl start systemd-resolved
+     ```
    - Create a symbolic link to link resolv.conf from systemd:
      ```bash
      ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
      ```
 
-9. **Verification:**
+10. **Final verification:**
    - Restart the WSL 2 instance and verify the network configuration with:
      ```bash
      ip addr show eth0
