@@ -6,6 +6,9 @@ Connecting to services running in WSL 2 from external sources can be challenging
 **Unfortunately the [original recipe](https://github.com/Unsigned-Char/WSL2HyperVSwitch) doesn't work in Windows 10 (at least for me) because setting `networkingMode = bridged` causes an error at WSL boot.
 Apparently _bridged_ networking mode stopped working with WSL version 2.1.5.0**
 
+**News: setting `networkingMode = bridged` works again starting from WSL [version](https://github.com/microsoft/WSL/releases) 2.5.6.
+Therefore the following solution may not be needed if WSL is updated**
+
 ## Solution Overview
 This recipe uses a Hyper-V virtual switch to bridge the WSL 2 network, providing improved control and visibility of Windows' network adapters within Ubuntu. The configuration supports both dynamic and static IP addressing, eliminating the need for port forwarding and simplifying network setup.
 
